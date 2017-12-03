@@ -1,0 +1,4 @@
+parameters:
+    ignoreErrors:
+        - '#Method Redis::connect\(\)#'
+        - '#Method Redis::select\(\)#'
