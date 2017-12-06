@@ -21,7 +21,7 @@ class CacheManager
             throw new \Exception("cannot find config for cache [$name]");
         }
 
-        if ('redis' === $opts['adapter'] ?? 'redis') {
+        if ('redis' === ($opts['adapter'] ?? 'redis')) {
             $host = $opts['host'] ?? '127.0.0.1';
             $port = $opts['port'] ?? 6379;
             $database = $opts['database']??  0;
