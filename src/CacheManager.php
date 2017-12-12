@@ -1,6 +1,8 @@
 <?php
 namespace Gap\Cache;
 
+use Symfony\Component\Cache\Simple\RedisCache;
+
 class CacheManager
 {
     protected $cnns;
@@ -20,19 +22,32 @@ class CacheManager
         if (!$opts = $this->optsSet[$name] ?? null) {
             throw new \Exception("cannot find config for cache [$name]");
         }
+        $adapter = $opts['adapter'] ?? 'redis';
 
-        if ('redis' === ($opts['adapter'] ?? 'redis')) {
+        if ('redis' === $adapter) {
             $host = $opts['host'] ?? '127.0.0.1';
             $port = $opts['port'] ?? 6379;
             $database = $opts['database']??  0;
+            $client = new Client("redis://$host:$post");
+            $client->select($database);
+            $cache = new RedisCache($client);
 
-            $redis = new \Redis();
-            $redis->connect($host, $port);
-            $redis->select($database);
-
-            $this->cnns[$name] = $redis;
+            return $cache;
         }
 
-        return $this->cnns[$name];
+        $class = adapter2Class($adapter);
+        $cache = new ReflectionClass($class);
+        
+        return $cache;
     }
+
+    protected function adapter2Class(string $adapter)
+    {
+        $class = 'Symfony\Component\Cache\Simple\\'.ucfirst($adapter).'Cache';
+        if(class_exists($class)){
+            return $class;
+        }
+
+        throw new \Exception("cannot find cache adapter class");
+    } 
 }
