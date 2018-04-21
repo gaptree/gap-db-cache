@@ -149,16 +149,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v4.0.1",
+            "version": "v4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "3691cb27e436c55af10ee06de30732623fa2f33e"
+                "reference": "681c245e629409a2f1ded6bf783e833d291d8af2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/cache/3691cb27e436c55af10ee06de30732623fa2f33e.zip",
-                "reference": "3691cb27e436c55af10ee06de30732623fa2f33e",
+                "url": "https://files.phpcomposer.com/files/symfony/cache/681c245e629409a2f1ded6bf783e833d291d8af2.zip",
+                "reference": "681c245e629409a2f1ded6bf783e833d291d8af2",
                 "shasum": ""
             },
             "require": {
@@ -214,7 +214,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2017-11-20T21:12:12+00:00"
+            "time": "2018-04-02T14:35:51+00:00"
         }
     ],
     "packages-dev": [],

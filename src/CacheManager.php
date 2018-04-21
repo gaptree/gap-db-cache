@@ -30,7 +30,7 @@ class CacheManager
         }
 
         if ('PSR16' === ($opts['adapter'] ?? 'default')) {
-            if('redis'===($opts['driver'] ?? 'redis')){
+            if ('redis'===($opts['driver'] ?? 'redis')) {
                 $redis = $this->createRedis($opts);
                 $cache = new RedisCache($redis);
                 
@@ -44,7 +44,7 @@ class CacheManager
         }
 
         if ('PSR6' === ($opts['adapter'] ?? 'default')) {
-            if('redis'===($opts['driver'] ?? 'redis')){
+            if ('redis'===($opts['driver'] ?? 'redis')) {
                 $redis = $this->createRedis($opts);
                 $cache = new RedisCache($redis);
                 
@@ -59,28 +59,28 @@ class CacheManager
         }
     }
 
-     protected function driver2Psr16Class(string $adapter)
-     {
-         $class = 'Symfony\Component\Cache\Simple\\'.ucfirst($adapter).'Cache';
-         if(class_exists($class)){
-             return $class;
-         }
+    protected function driver2Psr16Class(string $adapter)
+    {
+        $class = 'Symfony\Component\Cache\Simple\\'.ucfirst($adapter).'Cache';
+        if (class_exists($class)) {
+            return $class;
+        }
 
-         throw new \Exception("cannot find cache adapter class");
-     } 
+        throw new \Exception("cannot find cache adapter class");
+    }
 
-     protected function driver2Psr6Class(string $adapter)
-     {
-         $class = 'Symfony\Component\Cache\Adapter\\'.ucfirst($adapter).'Cache';
-         if(class_exists($class)){
-             return $class;
-         }
+    protected function driver2Psr6Class(string $adapter)
+    {
+        $class = 'Symfony\Component\Cache\Adapter\\'.ucfirst($adapter).'Cache';
+        if (class_exists($class)) {
+            return $class;
+        }
 
-         throw new \Exception("cannot find cache adapter class");
-     } 
+        throw new \Exception("cannot find cache adapter class");
+    }
 
-     protected function createRedis($opts): \Redis
-     {
+    protected function createRedis($opts): \Redis
+    {
         $host = $opts['host'] ?? '127.0.0.1';
         $port = $opts['port'] ?? 6379;
         $database = $opts['database'] ??  0;
@@ -89,5 +89,5 @@ class CacheManager
         $redis->select($database);
 
         return $redis;
-     }
+    }
 }
